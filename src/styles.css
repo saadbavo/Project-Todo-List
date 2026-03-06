@@ -74,3 +74,37 @@ header {
  
     
 }
+.add-list-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+.btn-add-list {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 5px 10px;
+    font-size: 1.4em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.btn-add-list:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+.btn-add-list:active {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    transform: scale(0.95);
+}
+.list-name {
+
+    flex: 1;
+    padding: 5px;
+    font-size: 1em;
+    border: none;
+    border-top: 1px solid #1a1919;
+    border-bottom: 1px solid #1a1919;
+    background-color: transparent;
+}
+
