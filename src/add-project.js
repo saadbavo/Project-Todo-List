@@ -1,4 +1,4 @@
-import { listContainer, printProjectName, clearInput, listNameInput   }   from "./doms";
+import { listContainer, printProjectName, clearInput, listNameInput, addRemoveBtn   }   from "./doms";
 
 export default function addProject() {
     const projectNAme = listNameInput.value;
@@ -8,6 +8,8 @@ export default function addProject() {
     }
     printProjectName(projectNAme);
     clearInput();
+    const projectNameElement = listContainer.lastChild;
+    addRemoveBtn(projectNameElement);
     
 }
 

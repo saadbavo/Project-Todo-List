@@ -125,3 +125,19 @@ header {
     padding: 5px;
     border-bottom: 1px solid #333333;
 }
+.project-name:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+.remove-btn {
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    margin-left: 10px;
+
+}
+.remove-btn:hover {
+    color: var(--primary-color);
+}

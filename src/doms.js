@@ -14,3 +14,13 @@ export function printProjectName(projectName) {
 export function clearInput() {
     listNameInput.value = '';
 }
+export function addRemoveBtn(projectNameElement) {
+    const removeBtn = document.createElement('button');
+    removeBtn.classList.add('remove-btn');
+    removeBtn.textContent = 'x';
+    projectNameElement.appendChild(removeBtn);
+}
+
+export function removeProject(project) {
+    project.remove();
+}
