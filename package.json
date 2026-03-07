@@ -29,13 +29,12 @@
   "dependencies": {
     "date-fns": "^4.1.0"
   },
-  
-  
-  "script": {
+   "scripts": {
     "build": "webpack",
     "dev": "webpack serve",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   }
+ 
   
 
 }
