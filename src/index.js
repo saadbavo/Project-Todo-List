@@ -1,30 +1,67 @@
 import './styles.css';
-import addProject, { listNameInput }  from './add-project'; 
-import { addTitle, printProjectName, removeProject, todoContainer, listContainer } from './doms';
+import { listContainer, listNameInput, renderProjectItem, setActiveProjectItem, setTodoTitle } from './doms.js';
+import addProject from './add-project.js';
+import changeProject from './change-project.js';
+import { getProjects, getActiveProjectId, removeProject } from './storage.js';
+import { loadProjectTasks } from './tasks.js';
+
 const btnAddList = document.querySelector('.btn-add-list');
-import changeProject from './change-project';
 
+function init() {
+    const projects = getProjects();
+    let activeId = getActiveProjectId();
 
+    if (!activeId && projects.length > 0) {
+        activeId = projects[0].id;
+    }
 
+    projects.forEach(project => renderProjectItem(project));
 
-// default project
-printProjectName('My day');
-addTitle({ firstChild: { textContent: 'My day' } });
+    if (activeId) {
+        const active = projects.find(p => p.id === activeId);
+        if (active) {
+            setActiveProjectItem(activeId);
+            setTodoTitle(active.name);
+            loadProjectTasks(activeId);
+        }
+    }
+}
 
 btnAddList.addEventListener('click', addProject);
 
-document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("remove-btn")) {
-        const project = e.target.closest(".project-name");
-        removeProject(project);
-    }
+listNameInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addProject();
 });
-//change at evry click on project name
-
 
 listContainer.addEventListener('click', (e) => {
-    // Only trigger if they clicked the project name span (and NOT the remove button)
-    if (e.target.classList.contains('project-name')) {
-        changeProject(e.target); // Pass the specific clicked element
+    const removeBtn = e.target.closest('.remove-btn');
+    const projectItem = e.target.closest('.project-name');
+
+    if (removeBtn && projectItem) {
+        const projectId = projectItem.dataset.projectId;
+        const newActiveId = removeProject(projectId);
+        projectItem.remove();
+
+        if (newActiveId) {
+            const remaining = document.querySelector(`[data-project-id="${newActiveId}"]`);
+            if (remaining) {
+                const name = remaining.querySelector('.project-name-text').textContent;
+                changeProject(newActiveId, name);
+            }
+        } else {
+            setTodoTitle('');
+            document.querySelector('.add-task-container').innerHTML = '';
+            document.querySelector('.tasks-container').innerHTML = '';
+            document.getElementById('todo-header').innerHTML = '';
+        }
+        return;
+    }
+
+    if (projectItem) {
+        const projectId = projectItem.dataset.projectId;
+        const name = projectItem.querySelector('.project-name-text').textContent;
+        changeProject(projectId, name);
     }
 });
+
+init();

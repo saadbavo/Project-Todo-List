@@ -1,17 +1,10 @@
-import { addTitle, clearTodoContainer } from './doms.js';
+import { setActiveProjectItem, setTodoTitle } from './doms.js';
+import { setActiveProject } from './storage.js';
+import { loadProjectTasks } from './tasks.js';
 
-export default function changeProject(clickedElement) {
-    
-    const projectTitle = document.querySelector('.project-title');
-
-    const currenttitletext = projectTitle ? projectTitle.textContent : '';
-
-    const clickedText = clickedElement.firstChild.textContent;
-    if (currenttitletext === clickedText) {
-        return; // No change needed if the same project is clicked
-    }
-    else {
-        clearTodoContainer();
-        addTitle(clickedElement);
-    }
+export default function changeProject(projectId, projectName) {
+    setActiveProject(projectId);
+    setActiveProjectItem(projectId);
+    setTodoTitle(projectName);
+    loadProjectTasks(projectId);
 }

@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List App</title>
-    <link rel="stylesheet" href="styles.css">
-    <script type="module" defer src="index.js"></script>
 </head>
 <body>
     <div id="header">
@@ -13,20 +11,17 @@
     </div>
     <div id="main">
         <div id="project">
-            <div class="list-container">
-            
+            <div class="list-container"></div>
+            <div class="add-list-container">
+                <button class="btn-add-list">+</button>
+                <input type="text" placeholder="List name" class="list-name">
             </div>
-            <div class="add-list-container"><button class="btn-add-list">+</button><input type="text" placeholder="List name" class="list-name"></div>
         </div>
         <div id="todo">
-            <div class="add-task-container">
-               
-            </div>
-            <div class="tasks-container">
-                
-            </div>
+            <div id="todo-header"></div>
+            <div class="add-task-container"></div>
+            <div class="tasks-container"></div>
         </div>
     </div>
-    
 </body>
 </html>
